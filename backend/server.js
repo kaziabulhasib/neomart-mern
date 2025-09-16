@@ -6,7 +6,9 @@ import authRouter from "./routes/auth.route.js";
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json()); // to parse data from body to json
 
 app.use("/api/auth", authRouter);
 
