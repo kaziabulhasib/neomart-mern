@@ -3,10 +3,13 @@ dotenv.config();
 import express from "express";
 import { connectDB } from "./lib/db.js";
 import authRouter from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+app.use(cookieParser());
 
 app.use(express.json()); // to parse data from body to json
 
