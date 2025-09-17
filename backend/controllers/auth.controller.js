@@ -26,14 +26,14 @@ const setCookies = (res, accessToken, refreshToken) => {
     httpOnly: true, // for cross site scripting prevention
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict", // for cross site request prevention
-    maxAge: 15 * 60 * 60,
+    maxAge: 15 * 60 * 1000, // 15 minutes
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 };
 
@@ -61,7 +61,6 @@ export const signup = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-      message: "user created successfully!",
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -69,7 +68,30 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  await res.send("login route");
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (user && (await user.comparePassword(password))) {
+      const { accessToken, refreshToken } = generateTokens(user._id);
+      await storeRefreshToken(user._id, refreshToken);
+      setCookies(res, accessToken, refreshToken);
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
+      // console.log(user);
+    } else {
+      res.status(400).json({ message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "server error", error: error.message });
+    console.log(error);
+  }
 };
 
 export const logout = async (req, res) => {

@@ -6,11 +6,20 @@ export const redis = createClient({
   url: process.env.UPSTASH_REDIS_URL,
 });
 
-redis.on("error", function (err) {
-  throw err;
-});
-await redis.connect();
-await redis.set("foo", "barrrrrrrrrrrr");
+// Logging
+// redis.on("connect", () => console.log("✅ Redis client connected"));
+// redis.on("ready", () => console.log("✅ Redis client ready to use"));
+// redis.on("end", () => console.log("❌ Redis client disconnected"));
 
-// Disconnect after usage
-// await redis.disconnect();
+redis.on("error", (err) => console.error("❌ Redis client error:", err));
+
+const connectRedis = async () => {
+  try {
+    await redis.connect();
+    console.log("🚀 Redis connection established");
+  } catch (err) {
+    console.error("❌ Could not connect to Redis:", err);
+  }
+};
+
+connectRedis();
