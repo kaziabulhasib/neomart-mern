@@ -37,3 +37,7 @@ export const getFeaturedProducts = async (req, res) => {
     res.status(500).json({ message: "server error", error: error.message });
   }
 };
+
+export const createProduct = async (req, res) => {
+  res.send("create product route");
+};
