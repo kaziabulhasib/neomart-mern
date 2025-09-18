@@ -8,6 +8,7 @@ import {
   getFeaturedProducts,
   getProductsByCategory,
   getRecommendedProducts,
+  toggleFeaturedProduct,
 } from "../controllers/product.controller.js";
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.get("/featured", getFeaturedProducts);
 router.get("/category:category", getProductsByCategory);
 router.get("/recommendation", getRecommendedProducts);
 router.post("/", createProduct);
+router.patch("/:id", toggleFeaturedProduct);
 router.delete("/:id", protectRoute, adminRoute, deleteProduct);
 export default router;
