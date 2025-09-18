@@ -12,3 +12,33 @@ export const getCoupon = async (req, res) => {
     res.status(500).json({ message: "server error", message: error.message });
   }
 };
+
+export const ValidateCoupon = async (req, res) => {
+  try {
+    const { code } = req.body;
+    const coupon = await Coupon.findOne({
+      code: code,
+      userId: user._id,
+      isActive: true,
+    });
+
+    if (!coupon) {
+      return res.status(404).json({ message: "coupon not found" });
+    }
+
+    if (coupon.expirationDate < new Date()) {
+      coupon.isActive = false;
+      await coupon.save();
+      return res.status(404).json({ message: "Coupon expired" });
+    }
+
+    res.json({
+      message: "coupon is valid",
+      code: coupon.code,
+      discountPerCentage: coupon.discountPercentage,
+    });
+  } catch (error) {
+    console.log("error in handling the coupon ", error);
+    res.status(500).json({ message: "server error", message: error.message });
+  }
+};
