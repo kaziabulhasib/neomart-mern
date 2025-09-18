@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       minlength: [6, "password must be at least 6 characters"],
     },
 
-    cart: [
+    cartItems: [
       {
         quantity: {
           type: Number,
@@ -43,8 +43,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-
 
 // pre-save hook t hash password before save to db
 
