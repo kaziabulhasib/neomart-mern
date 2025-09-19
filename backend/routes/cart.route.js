@@ -7,7 +7,7 @@ import {
 } from "../controllers/cart.controller.js";
 import { protectRoute } from "../middlewares/auth.middleware.js";
 
-const router = express.router();
+const router = express.Router();
 
 router.get("/", protectRoute, getCartProducts);
 router.post("/", protectRoute, addToCart);
