@@ -25,6 +25,11 @@ app.use("/api/cart", cartRouter);
 app.use("/api/coupon", couponRouter);
 app.use("/api/payments", paymentRoutes);
 
+// to do analytics route
+app.use("/api/analytics", (req, res) => {
+  res.send("analytics will come soon .....");
+});
+
 app.get("/", (req, res) => res.send("hello"));
 
 app.listen(PORT, () => {
