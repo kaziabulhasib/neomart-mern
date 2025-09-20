@@ -42,6 +42,18 @@ export const userUserStore = create((set, get) => ({
     }
   },
 
+  logout: async () => {
+    try {
+      await axios.post("/auth/logout");
+      set({ user: null });
+      toast.success("user logout successfully");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "An error occurred during logout"
+      );
+    }
+  },
+
   checkAuth: async () => {
     set({ checkingAuth: true });
     try {
