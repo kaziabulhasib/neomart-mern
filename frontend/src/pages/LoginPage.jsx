@@ -1,20 +1,19 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight, Loader, Lock, LogIn, Mail } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
-// import { useUserStore } from "../stores/useUserStore";
+import { userUserStore } from "../stores/useUserStore";
 
 const LoginPage = () => {
-  const loading = false;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const { login, loading } = useUserStore();
+  const { login, loading } = userUserStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
-    // login(email, password);
+    login(email, password);
   };
 
   return (
