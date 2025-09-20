@@ -18,7 +18,7 @@ export const userUserStore = create((set, get) => ({
 
     try {
       const res = await axios.post("/auth/signup", { name, email, password });
-      set({ user: res.data.user, loading: false });
+      set({ user: res.data, loading: false });
     } catch (error) {
       set({ loading: false });
       toast.error(
@@ -31,13 +31,25 @@ export const userUserStore = create((set, get) => ({
     set({ loading: true });
 
     try {
-      const res = await axios.post("/auth/login", {  email, password });
-      set({ user: res.data.user, loading: false });
+      const res = await axios.post("/auth/login", { email, password });
+      console.log(res.data);
+      set({ user: res.data, loading: false });
     } catch (error) {
       set({ loading: false });
       toast.error(
         error.response.data.message || "an error happened try later again"
       );
+    }
+  },
+
+  checkAuth: async () => {
+    set({ checkingAuth: true });
+    try {
+      const response = await axios.get("/auth/profile");
+      set({ checkingAuth: false, user: response.data });
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      set({ checkingAuth: false, user: null });
     }
   },
 }));
