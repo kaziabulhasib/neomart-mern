@@ -37,7 +37,7 @@ export const userUserStore = create((set, get) => ({
     } catch (error) {
       set({ loading: false });
       toast.error(
-        error.response.data.message || "an error happened try later again"
+        error.response.data.message || "an error happened try  again later"
       );
     }
   },
