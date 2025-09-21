@@ -43,7 +43,7 @@ const Navbar = () => {
             {/* admin special option  */}
             {isAdmin && (
               <Link
-                to='/admin'
+                to='/secret-dashboard'
                 className='text-gray-300 hover:text-emerald-400 transition duration-300 ease-in-out'>
                 <Lock className='inline mr-1 ' size={18} />
                 <span className='hidden sm:inline'>Dashboard</span>
