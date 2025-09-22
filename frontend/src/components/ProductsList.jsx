@@ -3,7 +3,7 @@ import { Trash, Star } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
 
 const ProductsList = () => {
-  const { products } = useProductStore();
+  const { products, toggleFeaturedProduct, deleteProduct } = useProductStore();
 
   console.log("products", products);
   return (
@@ -73,7 +73,7 @@ const ProductsList = () => {
               </td>
               <td className='px-6 py-4 whitespace-nowrap'>
                 <button
-                  // onClick={() => toggleFeaturedProduct(product._id)}
+                  onClick={() => toggleFeaturedProduct(product._id)}
                   className={`p-1 rounded-full ${
                     product.isFeatured
                       ? "bg-yellow-400 text-gray-900"
@@ -84,7 +84,7 @@ const ProductsList = () => {
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
                 <button
-                  // onClick={() => deleteProduct(product._id)}
+                  onClick={() => deleteProduct(product._id)}
                   className='text-red-400 hover:text-red-300'>
                   <Trash className='h-5 w-5' />
                 </button>
