@@ -24,6 +24,20 @@ const CreateProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(newProduct);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setNewProduct({ ...newProduct, image: reader.result });
+      };
+
+      reader.readAsDataURL(file); // base64 string
+    }
   };
 
   return (
@@ -133,7 +147,7 @@ const CreateProductForm = () => {
             id='image'
             className='sr-only'
             accept='image/*'
-            // onChange={handleImageChange}
+            onChange={handleImageChange}
           />
           <label
             htmlFor='image'
