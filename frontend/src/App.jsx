@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { userUserStore } from "./stores/useUserStore";
 import LoadingSpinner from "./components/LoadingSpinner";
 import AdminPage from "./components/AdminPage";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
   const { user, checkAuth, checkingAuth } = userUserStore();
@@ -44,6 +45,7 @@ const App = () => {
               user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />
             }
           />
+          <Route path='/category/:category' element={<CategoryPage />} />
         </Routes>
       </div>
       <Toaster />
