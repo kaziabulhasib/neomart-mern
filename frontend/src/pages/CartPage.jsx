@@ -3,6 +3,8 @@ import { useCartStore } from "../stores/useCartStore";
 import { ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import EmptyCartUI from "../components/EmptyCartUI";
+import PeopleAlsoBought from "../components/PeopleAlsoBought";
+import CartItem from "../components/CartItem";
 const CartPage = () => {
   const { cart } = useCartStore();
   return (
@@ -19,12 +21,11 @@ const CartPage = () => {
             ) : (
               <div className='space-y-6'>
                 {cart.map((item) => (
-                  // <CartItem key={item._id} item={item} />
-                  <h1>cart item</h1>
+                  <CartItem key={item._id} item={item} />
                 ))}
               </div>
             )}
-            {/* {cart.length > 0 && <PeopleAlsoBought />} */}
+            {cart.length > 0 && <PeopleAlsoBought />}
           </motion.div>
 
           {/* {cart.length > 0 && (
