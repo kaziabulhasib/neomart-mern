@@ -6,6 +6,7 @@ import EmptyCartUI from "../components/EmptyCartUI";
 import PeopleAlsoBought from "../components/PeopleAlsoBought";
 import CartItem from "../components/CartItem";
 import OrderSummary from "../components/OrderSummary";
+import GiftCouponCard from "../components/GiftCouponCard";
 const CartPage = () => {
   const { cart } = useCartStore();
   return (
@@ -36,7 +37,7 @@ const CartPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}>
               <OrderSummary />
-              {/* <GiftCouponCard /> */}
+              <GiftCouponCard />
             </motion.div>
           )}
         </div>
