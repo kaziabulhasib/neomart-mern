@@ -71,6 +71,7 @@ export const useCartStore = create((set, get) => ({
   },
   removeFromCart: async (productId) => {
     await axios.delete(`/cart`, { data: { productId } });
+    toast.success("item removed from cart");
     set((prevState) => ({
       cart: prevState.cart.filter((item) => item._id !== productId),
     }));
