@@ -5,8 +5,9 @@ import { MoveRight } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "../lib/axios";
 
+// const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLISH_KEY);
 const stripePromise = loadStripe(
-  "pk_test_51KZYccCoOZF2UhtOwdXQl3vcizup20zqKqT9hVUIsVzsdBrhqbUI2fE0ZdEVLdZfeHjeyFXtqaNsyCJCmZWnjNZa00PzMAjlcL"
+  "pk_test_51PL7u6SCHfPj8EmM7Fk4hnK6n7eK5pZ47z7CHeVhPnkXZ5YpJjXXvdkjZwQWsT3yync90IT6ATrZRAP8SztUkU5v00C4h9CWYb"
 );
 
 const OrderSummary = () => {

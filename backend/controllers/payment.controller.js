@@ -9,13 +9,13 @@ export const createCheckoutSession = async (req, res) => {
     const { products, couponCode } = req.body;
 
     if (!Array.isArray(products) || products.length === 0) {
-      return res.status(400).json({ error: "invalid or empty product array" });
+      return res.status(400).json({ error: "Invalid or empty products array" });
     }
 
     let totalAmount = 0;
 
     const lineItems = products.map((product) => {
-      const amount = Math.round(product.price * 100); // stripe needs amount in cent
+      const amount = Math.round(product.price * 100); // stripe wants u to send in the format of cents
       totalAmount += amount * product.quantity;
 
       return {
@@ -27,6 +27,7 @@ export const createCheckoutSession = async (req, res) => {
           },
           unit_amount: amount,
         },
+        quantity: product.quantity || 1,
       };
     });
 
@@ -39,7 +40,7 @@ export const createCheckoutSession = async (req, res) => {
       });
       if (coupon) {
         totalAmount -= Math.round(
-          totalAmount * (coupon.discountPercentage / 100)
+          (totalAmount * coupon.discountPercentage) / 100
         );
       }
     }
@@ -71,20 +72,16 @@ export const createCheckoutSession = async (req, res) => {
     });
 
     if (totalAmount >= 20000) {
-      // 20000 = 20$ in cent
       await createNewCoupon(req.user._id);
     }
-
-    res
-      .status(200)
-      .json({ sessionId: session.id, totalAmount: totalAmount / 100 });
+    res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 });
   } catch (error) {
-    console.log("error in creating checkout session", error);
-    res.status(500).json({ message: "server error", error: error.message });
+    console.error("Error processing checkout:", error);
+    res
+      .status(500)
+      .json({ message: "Error processing checkout", error: error.message });
   }
 };
-
-
 
 export const checkoutSuccess = async (req, res) => {
   try {
@@ -131,11 +128,7 @@ export const checkoutSuccess = async (req, res) => {
   }
 };
 
-
-
-
-
-// utils 
+// utils
 
 async function createStripeCoupon(discountPercentage) {
   const coupon = await stripe.coupons.create({

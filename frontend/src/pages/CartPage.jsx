@@ -2,6 +2,7 @@ import React from "react";
 import { useCartStore } from "../stores/useCartStore";
 import { ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
+
 import EmptyCartUI from "../components/EmptyCartUI";
 import PeopleAlsoBought from "../components/PeopleAlsoBought";
 import CartItem from "../components/CartItem";
