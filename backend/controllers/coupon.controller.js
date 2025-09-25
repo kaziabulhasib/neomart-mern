@@ -35,7 +35,7 @@ export const ValidateCoupon = async (req, res) => {
     res.json({
       message: "coupon is valid",
       code: coupon.code,
-      discountPerCentage: coupon.discountPercentage,
+      discountPercentage: coupon.discountPercentage,
     });
   } catch (error) {
     console.log("error in handling the coupon ", error);
