@@ -18,7 +18,7 @@ export const ValidateCoupon = async (req, res) => {
     const { code } = req.body;
     const coupon = await Coupon.findOne({
       code: code,
-      userId: user._id,
+      userId: req.user._id,
       isActive: true,
     });
 

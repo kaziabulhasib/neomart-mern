@@ -22,7 +22,7 @@ app.use(express.json()); // to parse data from body to json
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
-app.use("/api/coupon", couponRouter);
+app.use("/api/coupons", couponRouter);
 app.use("/api/payments", paymentRoutes);
 
 // to do analytics route
