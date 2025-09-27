@@ -1,9 +1,9 @@
 import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useCartStore } from "../stores/useCartStore";
-import axios from "../lib/axios";
 import Confetti from "react-confetti";
+import { Link } from "react-router-dom";
+import axios from "../lib/axios";
+import { useCartStore } from "../stores/useCartStore";
 
 const PurchaseSuccessPage = () => {
   const [isProcessing, setIsProcessing] = useState(true);
