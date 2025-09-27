@@ -15,7 +15,9 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const __dirname = path.resolve();
+// 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(cookieParser());
 
