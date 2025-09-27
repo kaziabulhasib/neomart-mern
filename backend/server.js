@@ -7,6 +7,7 @@ import cartRouter from "./routes/cart.route.js";
 import productRouter from "./routes/product.route.js";
 import couponRouter from "./routes/coupon.route.js";
 import paymentRoutes from "./routes/payment.route.js";
+import analyticsRoutes from "./routes/analytics.route.js";
 
 import cookieParser from "cookie-parser";
 
@@ -24,11 +25,7 @@ app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/coupons", couponRouter);
 app.use("/api/payments", paymentRoutes);
-
-// to do analytics route
-app.use("/api/analytics", (req, res) => {
-  res.send("analytics will come soon .....");
-});
+app.use("/api/analytics", analyticsRoutes);
 
 app.get("/", (req, res) => res.send("hello"));
 
