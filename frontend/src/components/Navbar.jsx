@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Lock, LogIn, LogOut, ShoppingCart, UserPlus } from "lucide-react";
-import { userUserStore } from "../stores/useUserStore";
+import { useUserStore } from "../stores/useUserStore";
 import { useCartStore } from "../stores/useCartStore";
 const Navbar = () => {
-  const { user, logout } = userUserStore();
+  const { user, logout } = useUserStore();
   const { cart } = useCartStore();
 
   console.log({ user });

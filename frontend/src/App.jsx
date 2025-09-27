@@ -5,7 +5,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
-import { userUserStore } from "./stores/useUserStore";
+import { useUserStore } from "./stores/useUserStore";
 import LoadingSpinner from "./components/LoadingSpinner";
 import AdminPage from "./components/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
@@ -15,7 +15,7 @@ import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
 const App = () => {
-  const { user, checkAuth, checkingAuth } = userUserStore();
+  const { user, checkAuth, checkingAuth } = useUserStore();
   const { getCartItems } = useCartStore();
 
   useEffect(() => {
