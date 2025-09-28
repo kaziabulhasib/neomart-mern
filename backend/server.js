@@ -1,4 +1,5 @@
 import cookieParser from "cookie-parser";
+import path from "path";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -13,11 +14,10 @@ import productRouter from "./routes/product.route.js";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const __dirname = path.resolve();
 
 app.use(cookieParser());
 app.use(express.json());
