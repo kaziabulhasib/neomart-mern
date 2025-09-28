@@ -27,7 +27,6 @@ app.use("/api/coupons", couponRouter);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-// Health check
 app.get("/", (req, res) => res.send("Ecommerce server is running...."));
 
 // Serve frontend in production
@@ -35,7 +34,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   // Express 5 catch-all for SPA
-  app.get("/:path(*)", (req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
