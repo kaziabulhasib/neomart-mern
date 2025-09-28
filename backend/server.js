@@ -2,8 +2,6 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import dotenv from "dotenv";
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 import { connectDB } from "./lib/db.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import authRouter from "./routes/auth.route.js";
