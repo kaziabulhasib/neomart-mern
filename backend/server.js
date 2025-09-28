@@ -8,21 +8,18 @@ import cartRouter from "./routes/cart.route.js";
 import couponRouter from "./routes/coupon.route.js";
 import paymentRoutes from "./routes/payment.route.js";
 import productRouter from "./routes/product.route.js";
-dotenv.config();
-
 import cookieParser from "cookie-parser";
 
+dotenv.config();
+
 const app = express();
-
 const PORT = process.env.PORT || 3000;
-
 const __dirname = path.resolve();
 
 app.use(cookieParser());
+app.use(express.json());
 
-app.use(express.json()); // to parse data from body to json
-
-// routes
+// API routes
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
@@ -30,24 +27,20 @@ app.use("/api/coupons", couponRouter);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
+// Health check
 app.get("/", (req, res) => res.send("Ecommerce server is running...."));
 
+// Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-//   });
-// }
-
-
-app.get("/:path(*)", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-});
-
+  // Express 5 catch-all for SPA
+  app.get("/:path(*)", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
-
+  console.log(`Server is running on port ${PORT}`);
   connectDB();
 });
