@@ -32,6 +32,22 @@
 - 🛡️ Data Protection
 - 🚀Caching with Redis
 
+---
+
+### Tech Stack
+**Frontend:** React, Tailwind CSS, Zustand  
+
+**Backend:** Node.js, Express.js  
+
+**Database:** MongoDB  
+
+**Cache:** Redis  
+
+**Payments:** Stripe  
+
+**Image Hosting:** Cloudinary  
+
+
 ### Setup .env file
 
 ```bash
